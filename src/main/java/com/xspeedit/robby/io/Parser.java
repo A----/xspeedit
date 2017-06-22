@@ -18,7 +18,7 @@ public class Parser
             throw new IllegalArgumentException("Invalid input: " + str);
         }
         else {
-            ArrayList<Integer> collection = new ArrayList<Integer>();
+            Collection<Integer> collection = new ArrayList<Integer>();
             for(int i = 0; i < str.length(); i++) {
                 collection.add(Character.getNumericValue(str.charAt(i)));
             }

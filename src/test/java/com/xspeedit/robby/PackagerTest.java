@@ -13,28 +13,42 @@ public class PackagerTest
 {
     @Test
     public void testPackageBoxValid() {
-        Iterable<Integer> input = Arrays.asList(1, 6, 3, 8, 4);
-        ArrayList<Iterable<Integer>> expected = new ArrayList<>();
+        Collection<Integer> input = Arrays.asList(1, 6, 3, 8, 4);
+        Collection<Collection<Integer>> expected = new ArrayList<>();
         expected.add(Arrays.asList(1, 6, 3));
         expected.add(Arrays.asList(8));
         expected.add(Arrays.asList(4));
 
         Packager packager = new Packager();
-        Iterable<Iterable<Integer>> actual = packager.packageBoxes(input);
+        Collection<Collection<Integer>> actual = packager.packageBoxes(input);
 
         assertThat(actual, notNullValue());
-        //assertThat(actual, has(expected));
+        assertThat(actual, is(expected));
     }
 
     @Test
-    public void testEmpty() {
-        Iterable<Integer> input = Arrays.asList();
-        Collection<Iterable<Integer>> expected = new ArrayList<>();
+    public void testPackageBoxExactSize() {
+        Collection<Integer> input = Arrays.asList(1, 6, 3, 8, 2);
+        Collection<Collection<Integer>> expected = new ArrayList<>();
+        expected.add(Arrays.asList(1, 6, 3));
+        expected.add(Arrays.asList(8, 2));
 
         Packager packager = new Packager();
-        Iterable<Iterable<Integer>> actual = packager.packageBoxes(input);
+        Collection<Collection<Integer>> actual = packager.packageBoxes(input);
 
         assertThat(actual, notNullValue());
-        //assertThat(actual, is(expected));
+        assertThat(actual, is(expected));
+    }
+
+    @Test
+    public void testPackageBoxEmpty() {
+        Collection<Integer> input = Arrays.asList();
+        Collection<Collection<Integer>> expected = new ArrayList<>();
+
+        Packager packager = new Packager();
+        Collection<Collection<Integer>> actual = packager.packageBoxes(input);
+
+        assertThat(actual, notNullValue());
+        assertThat(actual, is(expected));
     }
 }
