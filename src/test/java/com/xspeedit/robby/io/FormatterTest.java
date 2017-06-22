@@ -2,17 +2,17 @@ package com.xspeedit.robby.io;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import com.xspeedit.robby.io.Parser;
 import static org.junit.Assert.assertThat;
 
 import static org.hamcrest.CoreMatchers.*;
 import org.junit.Test;
+import java.util.Collection;
 
 public class FormatterTest
 {
     @Test
     public void testFormatValid() {
-        ArrayList<Iterable<Integer>> input = new ArrayList<>();
+        Collection<Collection<Integer>> input = new ArrayList<>();
         input.add(Arrays.asList(1, 6, 3));
         input.add(Arrays.asList(8));
         input.add(Arrays.asList(4));
@@ -26,8 +26,8 @@ public class FormatterTest
     }
 
     @Test
-    public void testEmpty() {
-        ArrayList<Iterable<Integer>> input = new ArrayList<>();
+    public void testFormatEmpty() {
+        Collection<Collection<Integer>> input = new ArrayList<>();
         String expected = "";
 
         Formatter formatter = new Formatter();

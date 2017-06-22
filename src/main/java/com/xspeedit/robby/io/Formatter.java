@@ -14,19 +14,19 @@ public class Formatter
 {
     private final String SEPARATOR = "/";
 
-    public String format(Iterable<Iterable<Integer>> collection) {
+    public String format(Collection<Collection<Integer>> collection) {
         StringBuilder builder = new StringBuilder();
 
-        Iterator<Integer> subIterator = null;
-        Iterator<Iterable<Integer>> iterator = collection.iterator();
+        Collection<Integer> subCollection = null;
+        Iterator<Collection<Integer>> iterator = collection.iterator();
         while (iterator.hasNext()) {
-            if (subIterator != null) {
+            if (subCollection != null) {
                 builder.append(SEPARATOR);
             }
 
-            subIterator = iterator.next().iterator();
-            while (subIterator.hasNext()) {
-                builder.append(subIterator.next());
+            subCollection = iterator.next();
+            for (Integer i : subCollection) {
+                builder.append(i);
             }
         }
         return builder.toString();
