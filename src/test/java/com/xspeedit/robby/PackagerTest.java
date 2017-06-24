@@ -5,6 +5,9 @@ import static org.junit.Assert.assertThat;
 
 import static org.hamcrest.CoreMatchers.*;
 import org.junit.Test;
+
+import com.xspeedit.robby.packagingstrategies.BasicPackagingStrategy;
+
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -18,7 +21,7 @@ public class PackagerTest
         expected.add(Arrays.asList(8));
         expected.add(Arrays.asList(4));
 
-        Packager packager = new Packager();
+        Packager packager = new Packager(new BasicPackagingStrategy());
         Collection<Collection<Integer>> actual = packager.packageBoxes(input);
 
         assertThat(actual, notNullValue());
@@ -32,7 +35,7 @@ public class PackagerTest
         expected.add(Arrays.asList(1, 6, 3));
         expected.add(Arrays.asList(8, 2));
 
-        Packager packager = new Packager();
+        Packager packager = new Packager(new BasicPackagingStrategy());
         Collection<Collection<Integer>> actual = packager.packageBoxes(input);
 
         assertThat(actual, notNullValue());
@@ -44,7 +47,7 @@ public class PackagerTest
         Collection<Integer> input = Arrays.asList();
         Collection<Collection<Integer>> expected = new ArrayList<>();
 
-        Packager packager = new Packager();
+        Packager packager = new Packager(new BasicPackagingStrategy());
         Collection<Collection<Integer>> actual = packager.packageBoxes(input);
 
         assertThat(actual, notNullValue());
