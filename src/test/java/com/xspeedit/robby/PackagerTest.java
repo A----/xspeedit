@@ -1,7 +1,6 @@
 package com.xspeedit.robby;
 
 import java.util.Arrays;
-import com.xspeedit.robby.io.Parser;
 import static org.junit.Assert.assertThat;
 
 import static org.hamcrest.CoreMatchers.*;
