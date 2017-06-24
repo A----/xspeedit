@@ -1,11 +1,7 @@
 package com.xspeedit.robby;
 
-import java.util.regex.Pattern;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.regex.Matcher;
 import java.util.Collection;
-import java.util.Iterator;
 
 /**
  * Place les entiers par "groupe" de 10.

@@ -1,7 +1,5 @@
 package com.xspeedit.robby;
 
-import java.util.Arrays;
-import com.xspeedit.robby.io.Parser;
 import static org.junit.Assert.assertThat;
 
 import static org.hamcrest.CoreMatchers.*;
@@ -13,8 +11,6 @@ import org.junit.experimental.categories.Category;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.util.ArrayList;
-import java.util.Collection;
 
 import com.xspeedit.robby.testcategories.IntegrationTests;
 
