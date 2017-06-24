@@ -10,7 +10,7 @@ import java.util.Collection;
  */
 public class Parser
 {
-    private static final Pattern VALID_ENTRIES = Pattern.compile("^[0-9]*$");
+    private static final Pattern VALID_ENTRIES = Pattern.compile("^[1-9]*$");
 
     public Collection<Integer> parse(String str) {
         Matcher matcher = VALID_ENTRIES.matcher(str);

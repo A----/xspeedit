@@ -29,6 +29,14 @@ public class ParserTest
         parser.parse(input);
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void testParseInvalidZero() {
+        String input = "163084";
+
+        Parser parser = new Parser();
+        parser.parse(input);
+    }
+
     @Test
     public void testEmpty() {
         String input = "";
