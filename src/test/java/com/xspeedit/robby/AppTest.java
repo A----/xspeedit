@@ -16,6 +16,9 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import com.xspeedit.robby.testcategories.IntegrationTests;
+
+@Category(IntegrationTests.class)
 public class AppTest
 {
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
