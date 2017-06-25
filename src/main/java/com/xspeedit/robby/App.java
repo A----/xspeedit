@@ -2,6 +2,7 @@ package com.xspeedit.robby;
 
 import com.xspeedit.robby.io.Formatter;
 import com.xspeedit.robby.io.Parser;
+import com.xspeedit.robby.packagingstrategies.BasicPackagingStrategy;
 
 public class App 
 {
@@ -12,7 +13,7 @@ public class App
 
         Parser parser = new Parser();
         Formatter formatter = new Formatter();
-        Packager packager = new Packager();
+        Packager packager = new Packager(new BasicPackagingStrategy());
 
         if (args.length > 0) {
             input = args[0];
