@@ -2,6 +2,7 @@ package com.xspeedit.robby;
 
 import com.xspeedit.robby.io.Formatter;
 import com.xspeedit.robby.io.Parser;
+import com.xspeedit.robby.packagingstrategies.AdvancedPackagingStrategy;
 
 public class App 
 {
@@ -12,7 +13,7 @@ public class App
 
         Parser parser = new Parser();
         Formatter formatter = new Formatter();
-        Packager packager = new Packager();
+        Packager packager = new Packager(new AdvancedPackagingStrategy());
 
         if (args.length > 0) {
             input = args[0];
@@ -21,8 +22,13 @@ public class App
             input = "";
         }
 
-        output = formatter.format(packager.packageBoxes(parser.parse(input)));
-
-        System.out.println(output);
+        try {
+            output = formatter.format(packager.packageBoxes(parser.parse(input)));
+            System.out.println(output);
+        }
+        catch (IllegalArgumentException e) {
+            System.err.println("Invalid input: " + input);
+            System.exit(1);
+        }
     }
 }
