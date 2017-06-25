@@ -27,7 +27,7 @@ Exemples de retours :
 Invalid input: 12345AAD
 ```
 
-## Génération du rapport d'optimisation
+## Génération du rapport d'optimisation
 
 Pour activer les tests d'optimisation, ajouter le profil `optimisation` à l'exécution de Maven :
 
