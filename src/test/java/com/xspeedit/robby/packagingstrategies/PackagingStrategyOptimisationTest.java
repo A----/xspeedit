@@ -5,6 +5,9 @@ import java.util.Arrays;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameters;
 
 import com.xspeedit.robby.packagingstrategies.BasicPackagingStrategy;
 
@@ -16,9 +19,22 @@ import java.util.Random;
 
 import com.xspeedit.robby.testcategories.OptimisationTests;
 
+@RunWith(Parameterized.class)
 @Category(OptimisationTests.class)
 public class PackagingStrategyOptimisationTest
 {
+
+    @Parameters
+    public static Collection<PackagingStrategy> data() {
+        return Arrays.asList(new BasicPackagingStrategy(), new AdvancedPackagingStrategy());
+    }
+
+    private final PackagingStrategy strategy;
+
+    public PackagingStrategyOptimisationTest(PackagingStrategy strategy) {
+        this.strategy = strategy;
+    }
+
     private static final int DEFAULT_CAPACITY = 10;
 
     private static final Map<String, Collection<Collection<Integer>>> TEST_SETS = new HashMap<>();
@@ -102,11 +118,10 @@ public class PackagingStrategyOptimisationTest
     }
 
     @Test
-    public void testBasicPackagingStrategy() {
-        PackagingStrategy strategy = new BasicPackagingStrategy();
+    public void testOptimisation() {
         ResultTestSet results;
         for (Map.Entry<String, Collection<Collection<Integer>>> testSet: TEST_SETS.entrySet()) {
-            results = new ResultTestSet(strategy, testSet.getKey());
+            results = new ResultTestSet(this.strategy, testSet.getKey());
             for (Collection<Integer> input: testSet.getValue()) {
                 results.add(input);
             }
