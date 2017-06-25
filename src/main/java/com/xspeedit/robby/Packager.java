@@ -1,6 +1,5 @@
 package com.xspeedit.robby;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 import com.xspeedit.robby.packagingstrategies.PackagingStrategy;
