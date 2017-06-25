@@ -6,6 +6,7 @@ import static org.hamcrest.CoreMatchers.*;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
@@ -20,6 +21,15 @@ public class AppTest
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
 
+    private static PrintStream DEFAULT_OUT;
+    private static PrintStream DEFAULT_ERR;
+
+    @BeforeClass
+    public static void saveDefaultStreams() {
+        DEFAULT_ERR = System.err;
+        DEFAULT_OUT = System.out;
+    }
+
     @Before
     public void setUpStreams() {
         System.setOut(new PrintStream(outContent));
@@ -28,8 +38,8 @@ public class AppTest
 
     @After
     public void cleanUpStreams() {
-        System.setOut(null);
-        System.setErr(null);
+        System.setOut(DEFAULT_OUT);
+        System.setErr(DEFAULT_ERR);
     }
 
     @Test
