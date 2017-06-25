@@ -12,6 +12,8 @@ import org.junit.experimental.categories.Category;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import com.xspeedit.robby.testcategories.IntegrationTests;
 
@@ -44,12 +46,31 @@ public class AppTest
 
     @Test
     public void testMainValid() {
-        String expected = "163/8/41/6/8/9/52/5/7/73";
+        int expectedCount = 15;
+        int[] countPerWeight = new int[] { 0, 2, 1, 2, 1, 2, 2, 2, 2, 1 };
 
         App.main(new String[] { "163841689525773" });
         String actual = outContent.toString().trim();
 
-        assertThat(actual, is(expected));
+        assertThat(actual.matches("^[1-9]+([/][1-9]+)*$"), is(true));
+        
+        Pattern countInts = Pattern.compile("[1-9]");
+        Matcher matcher = countInts.matcher(actual);
+        
+        int count = 0;
+        String group;
+        while (matcher.find()) {
+            count = count + 1;
+            group = matcher.group();
+
+            countPerWeight[Integer.parseInt(group)] = countPerWeight[Integer.parseInt(group)] - 1;
+        }
+
+        assertThat(count, is(expectedCount));
+        
+        for (int i = 0; i < countPerWeight.length; i++) {
+            assertThat(countPerWeight[i] + " elements of weight " + i + " remaining while they should not.", countPerWeight[i], is(0));
+        }
     }
 
     @Test
