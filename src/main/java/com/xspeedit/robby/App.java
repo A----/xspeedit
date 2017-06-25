@@ -22,8 +22,13 @@ public class App
             input = "";
         }
 
-        output = formatter.format(packager.packageBoxes(parser.parse(input)));
-
-        System.out.println(output);
+        try {
+            output = formatter.format(packager.packageBoxes(parser.parse(input)));
+            System.out.println(output);
+        }
+        catch (IllegalArgumentException e) {
+            System.err.println("Invalid input: " + input);
+            System.exit(1);
+        }
     }
 }
