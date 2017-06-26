@@ -3,6 +3,13 @@ package com.xspeedit.robby.packagingstrategies;
 import java.util.ArrayList;
 import java.util.Collection;
 
+/**
+ * Algorithme avancée.
+ * Compte les éléments par masse.
+ * Tant qu'il reste des éléments, prendre une nouvelle boîte.
+ * Tant qu'il reste de la place, placer l'élément le plus lourd pouvant rentrer.
+ * Répéter.
+ */
 public class AdvancedPackagingStrategy implements PackagingStrategy {
     private final static int MAX_WEIGHT = 9;
     private final static int MIN_WEIGHT = 1;
