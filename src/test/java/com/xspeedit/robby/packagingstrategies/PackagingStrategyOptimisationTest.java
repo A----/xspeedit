@@ -26,7 +26,7 @@ public class PackagingStrategyOptimisationTest
 
     @Parameters
     public static Collection<PackagingStrategy> data() {
-        return Arrays.asList(new BasicPackagingStrategy(), new AdvancedPackagingStrategy());
+        return Arrays.asList(new BasicPackagingStrategy(), new AdvancedPackagingStrategy(), new RecursivePackagingStrategy());
     }
 
     private final PackagingStrategy strategy;
@@ -52,7 +52,7 @@ public class PackagingStrategyOptimisationTest
 
     @BeforeClass
     public static void generateTestSets() {
-        int count = 100;
+        int count = 1000;
         String testSetName;
         for (int size : Arrays.asList(10)) {
             testSetName = "Test set of " + size + " elements";
@@ -71,6 +71,7 @@ public class PackagingStrategyOptimisationTest
 
     static class ResultTestSet {
         private static final BruteForcePackagingStrategy BRUTE_FORCE_PACKAGING_STRATEGY = new BruteForcePackagingStrategy();
+        private static final Map<Collection<Integer>, Collection<Collection<Integer>>> BRUTE_FORCE_OUTPUTS = new HashMap<>();
 
         private String testSetName;
         private PackagingStrategy strategy;
@@ -95,7 +96,14 @@ public class PackagingStrategyOptimisationTest
             Collection<Collection<Integer>> output = strategy.packageBoxes(input, DEFAULT_CAPACITY);
             endTime = System.nanoTime();
 
-            Collection<Collection<Integer>> bruteforceOutput = BRUTE_FORCE_PACKAGING_STRATEGY.packageBoxes(input, DEFAULT_CAPACITY);
+            Collection<Collection<Integer>> bruteforceOutput;
+            if (BRUTE_FORCE_OUTPUTS.containsKey(input)) {
+                bruteforceOutput = BRUTE_FORCE_OUTPUTS.get(input);
+            }
+            else {
+                bruteforceOutput = BRUTE_FORCE_PACKAGING_STRATEGY.packageBoxes(input, DEFAULT_CAPACITY);
+                BRUTE_FORCE_OUTPUTS.put(input, bruteforceOutput);
+            }
 
             executionTime = executionTime + (endTime - startTime);
 
@@ -105,6 +113,14 @@ public class PackagingStrategyOptimisationTest
 
             if (bruteforceOutput.size() < output.size()) {
                 subOptimalCount = subOptimalCount + 1;
+                /*System.out.println(input);
+                System.out.println(output);
+                System.out.println(bruteforceOutput);
+                System.out.println("---");*/
+            }
+            else if (bruteforceOutput.size() > output.size()) {
+                throw new IllegalStateException("Result is less than the brute-force one. Input: " + input +
+                    ", Output: " + output + ", Bruteforce: " + bruteforceOutput);
             }
         }
 
